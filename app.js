@@ -53,6 +53,10 @@ function checkLetter(btn) {
 let OnScreenButtons = Array.from(document.querySelectorAll('.keyrow button'));
 OnScreenButtons.forEach((e) => {
 	e.addEventListener('click', function (event) {
+		if (e.textContent) {
+			checkLetter(e.textContent);
+			return (e.className = 'chosen');
+		}
 		event.preventDefault();
 	});
 });
