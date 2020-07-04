@@ -3,6 +3,7 @@ const keyboard = document.querySelector('#qwerty');
 const phrase = document.querySelector('#phrase');
 const startGameBtn = document.querySelector('.btn__reset');
 const phraseOnDisplayUL = document.querySelector('#phrase ul');
+let onScreenButtons = Array.from(document.querySelectorAll('.keyrow button'));
 
 // Missed quesses is initialized with 0
 let missedGuesses = 0;
@@ -50,17 +51,22 @@ function checkLetter(btn) {
 	});
 }
 
-let OnScreenButtons = Array.from(document.querySelectorAll('.keyrow button'));
-OnScreenButtons.forEach((e) => {
+function setAttributes(element, attrs) {
+	for (let key in attrs) {
+		element.setAttribute(key, attrs[key]);
+	}
+}
+
+onScreenButtons.forEach((e) => {
 	e.addEventListener('click', function (event) {
 		if (e.textContent) {
 			checkLetter(e.textContent);
-			return (e.className = 'chosen');
+			setAttributes(e, { class: 'chosen', disabled: 'true' });
 		}
 		event.preventDefault();
 	});
 });
 
-document.addEventListener('keydown', (keyInput) => {
-	checkLetter(keyInput.key);
-});
+// document.addEventListener('keydown', (keyInput) => {
+// 	checkLetter(keyInput.key);
+// });
